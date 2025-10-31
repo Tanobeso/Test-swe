@@ -445,6 +445,21 @@
                     </li>
                 </ul>
             </div>
+
+            <!-- Documenti -->
+            <div class="verbale-section">
+                <div class="section-header">
+                    <span class="section-icon">📚</span>
+                    <h2 class="section-title">Documenti</h2>
+                </div>
+                <ul class="pdf-list" id="documenti-list">
+                    <li class="loading">
+                        <div class="loading-dot"></div>
+                        <div class="loading-dot"></div>
+                        <div class="loading-dot"></div>
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <footer>
@@ -488,7 +503,7 @@
                     list.innerHTML = `
                         <li class="empty-state">
                             <div class="empty-state-icon">🔭</div>
-                            <div>Nessun verbale disponibile</div>
+                            <div>Nessun documento disponibile</div>
                         </li>
                     `;
                     return;
@@ -541,6 +556,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             loadPDFs('verbali_interni', 'interni-list');
             loadPDFs('verbali_esterni', 'esterni-list');
+            loadPDFs('documenti', 'documenti-list');
         });
     </script>
 </body>
