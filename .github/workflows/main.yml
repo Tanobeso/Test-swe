@@ -97,41 +97,37 @@ jobs:
       
       - name: Genera indice dei verbali
         run: |
-          # Genera JSON per verbali interni
-          echo '{"files": [' > output/verbali_interni/index.json
-          first=true
-          for pdf in output/verbali_interni/*.pdf 2>/dev/null; do
-            if [ -f "$pdf" ]; then
-              if [ "$first" = false ]; then
-                echo ',' >> output/verbali_interni/index.json
+          # Funzione per generare JSON
+          generate_json() {
+            local dir=$1
+            local output_file=$2
+            
+            echo '{"files":[' > "$output_file"
+            
+            local first=true
+            for pdf in "$dir"/*.pdf; do
+              if [ -f "$pdf" ]; then
+                if [ "$first" = "false" ]; then
+                  printf ',' >> "$output_file"
+                fi
+                printf '"%s"' "$(basename "$pdf")" >> "$output_file"
+                first=false
               fi
-              basename_pdf=$(basename "$pdf")
-              echo -n "  \"$basename_pdf\"" >> output/verbali_interni/index.json
-              first=false
-            fi
-          done
-          echo '' >> output/verbali_interni/index.json
-          echo ']}' >> output/verbali_interni/index.json
+            done
+            
+            echo ']}' >> "$output_file"
+          }
+          
+          # Genera JSON per verbali interni
+          generate_json "output/verbali_interni" "output/verbali_interni/index.json"
           
           # Genera JSON per verbali esterni
-          echo '{"files": [' > output/verbali_esterni/index.json
-          first=true
-          for pdf in output/verbali_esterni/*.pdf 2>/dev/null; do
-            if [ -f "$pdf" ]; then
-              if [ "$first" = false ]; then
-                echo ',' >> output/verbali_esterni/index.json
-              fi
-              basename_pdf=$(basename "$pdf")
-              echo -n "  \"$basename_pdf\"" >> output/verbali_esterni/index.json
-              first=false
-            fi
-          done
-          echo '' >> output/verbali_esterni/index.json
-          echo ']}' >> output/verbali_esterni/index.json
+          generate_json "output/verbali_esterni" "output/verbali_esterni/index.json"
           
           echo "✓ Indici JSON generati"
           echo "=== Verbali Interni ==="
           cat output/verbali_interni/index.json
+          echo ""
           echo "=== Verbali Esterni ==="
           cat output/verbali_esterni/index.json
       
