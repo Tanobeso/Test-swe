@@ -95,6 +95,46 @@ jobs:
             echo "✓ Copiati $(ls Verbali/Esterni/*.pdf | wc -l) PDF esterni"
           fi
       
+      - name: Genera indice dei verbali
+        run: |
+          # Genera JSON per verbali interni
+          echo '{"files": [' > output/verbali_interni/index.json
+          first=true
+          for pdf in output/verbali_interni/*.pdf 2>/dev/null; do
+            if [ -f "$pdf" ]; then
+              if [ "$first" = false ]; then
+                echo ',' >> output/verbali_interni/index.json
+              fi
+              basename_pdf=$(basename "$pdf")
+              echo -n "  \"$basename_pdf\"" >> output/verbali_interni/index.json
+              first=false
+            fi
+          done
+          echo '' >> output/verbali_interni/index.json
+          echo ']}' >> output/verbali_interni/index.json
+          
+          # Genera JSON per verbali esterni
+          echo '{"files": [' > output/verbali_esterni/index.json
+          first=true
+          for pdf in output/verbali_esterni/*.pdf 2>/dev/null; do
+            if [ -f "$pdf" ]; then
+              if [ "$first" = false ]; then
+                echo ',' >> output/verbali_esterni/index.json
+              fi
+              basename_pdf=$(basename "$pdf")
+              echo -n "  \"$basename_pdf\"" >> output/verbali_esterni/index.json
+              first=false
+            fi
+          done
+          echo '' >> output/verbali_esterni/index.json
+          echo ']}' >> output/verbali_esterni/index.json
+          
+          echo "✓ Indici JSON generati"
+          echo "=== Verbali Interni ==="
+          cat output/verbali_interni/index.json
+          echo "=== Verbali Esterni ==="
+          cat output/verbali_esterni/index.json
+      
       - name: Carica PDFs come artifacts
         uses: actions/upload-artifact@v4
         with:
