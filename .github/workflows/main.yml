@@ -36,7 +36,7 @@ jobs:
               if [ -f "${filename}.pdf" ]; then
                 mkdir -p "$(pwd)/../../../Verbali/Interni"
                 mv "${filename}.pdf" "$(pwd)/../../../Verbali/Interni/"
-                echo "✅ PDF spostato in Verbali/Interni/${filename}.pdf"
+                echo "PDF spostato in Verbali/Interni/${filename}.pdf"
               fi
               
               cd - > /dev/null
@@ -61,16 +61,16 @@ jobs:
               if [ -f "${filename}.pdf" ]; then
                 mkdir -p "$(pwd)/../../../Verbali/Esterni"
                 mv "${filename}.pdf" "$(pwd)/../../../Verbali/Esterni/"
-                echo "✅ PDF spostato in Verbali/Esterni/${filename}.pdf"
+                echo "PDF spostato in Verbali/Esterni/${filename}.pdf"
               fi
               
               cd - > /dev/null
             fi
           done
       
-      - name: Compila documenti
+      - name: Compila documenti candidatura
         run: |
-          for file in Documenti/Latex/*.tex; do
+          for file in Candidatura/Latex/*.tex; do
             if [ -f "$file" ]; then
               echo "Compilo $file..."
               filename=$(basename "$file" .tex)
@@ -84,9 +84,9 @@ jobs:
               
               # Sposta solo il PDF nella cartella finale
               if [ -f "${filename}.pdf" ]; then
-                mkdir -p "$(pwd)/../../Documenti"
-                mv "${filename}.pdf" "$(pwd)/../../Documenti/"
-                echo "✅ PDF spostato in Documenti/${filename}.pdf"
+                mkdir -p "$(pwd)/../../Candidatura"
+                mv "${filename}.pdf" "$(pwd)/../../Candidatura/"
+                echo "PDF spostato in Candidatura/${filename}.pdf"
               fi
               
               cd - > /dev/null
@@ -99,36 +99,36 @@ jobs:
           ls -lh Verbali/Interni/*.pdf 2>/dev/null || echo "Nessun PDF interno trovato"
           echo "=== PDFs Verbali Esterni ==="
           ls -lh Verbali/Esterni/*.pdf 2>/dev/null || echo "Nessun PDF esterno trovato"
-          echo "=== PDFs Documenti ==="
-          ls -lh Documenti/*.pdf 2>/dev/null || echo "Nessun PDF documento trovato"
+          echo "=== PDFs Documenti candidatura ==="
+          ls -lh Candidatura/*.pdf 2>/dev/null || echo "Nessun PDF documento trovato"
       
       - name: Prepara output per GitHub Pages
         run: |
           mkdir -p output/verbali_interni
           mkdir -p output/verbali_esterni
-          mkdir -p output/documenti
+          mkdir -p output/candidatura
           
           # Copia il file index.html e il logo
           cp .github/templates/index.html output/
-          cp .github/templates/logo.png output/ 2>/dev/null || echo "⚠️ Logo non trovato"
+          cp .github/templates/logo.png output/ 2>/dev/null || echo "Logo non trovato"
           
           # Copia TUTTI i PDF nella cartella output (compilati + già esistenti)
           if ls Verbali/Interni/*.pdf 1> /dev/null 2>&1; then
             cp Verbali/Interni/*.pdf output/verbali_interni/
-            echo "✅ Copiati $(ls Verbali/Interni/*.pdf | wc -l) PDF interni"
+            echo "Copiati $(ls Verbali/Interni/*.pdf | wc -l) PDF interni"
           fi
           
           if ls Verbali/Esterni/*.pdf 1> /dev/null 2>&1; then
             cp Verbali/Esterni/*.pdf output/verbali_esterni/
-            echo "✅ Copiati $(ls Verbali/Esterni/*.pdf | wc -l) PDF esterni"
+            echo "Copiati $(ls Verbali/Esterni/*.pdf | wc -l) PDF esterni"
           fi
           
-          # Copia documenti (compilati + già esistenti)
-          if ls Documenti/*.pdf 1> /dev/null 2>&1; then
-            cp Documenti/*.pdf output/documenti/
-            echo "✅ Copiati $(ls Documenti/*.pdf | wc -l) documenti"
+          # Copia documenti candidatura (compilati + già esistenti)
+          if ls Candidatura/*.pdf 1> /dev/null 2>&1; then
+            cp Candidatura/*.pdf output/candidatura/
+            echo "Copiati $(ls Candidatura/*.pdf | wc -l) documenti"
           else
-            echo "⚠️ Nessun documento trovato"
+            echo "Nessun documento trovato"
           fi
       
       - name: Genera indice dei verbali
@@ -160,18 +160,18 @@ jobs:
           # Genera JSON per verbali esterni
           generate_json "output/verbali_esterni" "output/verbali_esterni/index.json"
           
-          # Genera JSON per documenti
-          generate_json "output/documenti" "output/documenti/index.json"
+          # Genera JSON per candidatura
+          generate_json "output/candidatura" "output/candidatura/index.json"
           
-          echo "✅ Indici JSON generati"
+          echo "Indici JSON generati"
           echo "=== Verbali Interni ==="
           cat output/verbali_interni/index.json
           echo ""
           echo "=== Verbali Esterni ==="
           cat output/verbali_esterni/index.json
           echo ""
-          echo "=== Documenti ==="
-          cat output/documenti/index.json
+          echo "=== Candidatura ==="
+          cat output/candidatura/index.json
       
       - name: Carica PDFs come artifacts
         uses: actions/upload-artifact@v4
@@ -180,7 +180,7 @@ jobs:
           path: |
             Verbali/Interni/*.pdf
             Verbali/Esterni/*.pdf
-            Documenti/*.pdf
+            Candidatura/*.pdf
           if-no-files-found: warn
       
       - name: Commit PDFs su main
@@ -188,8 +188,8 @@ jobs:
           git config --global --add safe.directory /__w/Test-swe/Test-swe
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add Verbali/Interni/*.pdf Verbali/Esterni/*.pdf Documenti/*.pdf
-          git diff --staged --quiet || git commit -m "📄 Aggiorna PDFs compilati [skip ci]"
+          git add Verbali/Interni/*.pdf Verbali/Esterni/*.pdf Candidatura/*.pdf
+          git diff --staged --quiet || git commit -m "Aggiorna PDFs compilati [skip ci]"
           git push
       
       - name: Pubblica su GitHub Pages

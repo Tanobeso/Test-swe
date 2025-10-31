@@ -19,52 +19,8 @@
             overflow-x: hidden;
         }
 
-        /* Background animato */
-        .bg-decoration {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .bg-decoration::before,
-        .bg-decoration::after {
-            content: '';
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.15;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .bg-decoration::before {
-            width: 600px;
-            height: 600px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            top: -200px;
-            right: -200px;
-            animation-delay: 0s;
-        }
-
-        .bg-decoration::after {
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            bottom: -150px;
-            left: -150px;
-            animation-delay: -10s;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-            }
-            50% {
-                transform: translate(50px, 50px) scale(1.1);
-            }
+        body::-webkit-scrollbar {
+            display: none;       
         }
 
         .container {
@@ -79,7 +35,6 @@
         header {
             text-align: center;
             padding: 3rem 0 4rem;
-            animation: fadeInDown 0.8s ease-out;
         }
 
         .logo-container {
@@ -92,24 +47,14 @@
         .logo {
             max-width: 200px;
             height: auto;
-            filter: drop-shadow(0 10px 30px rgba(102, 126, 234, 0.5));
-            animation: logoFloat 3s ease-in-out infinite;
         }
 
-        @keyframes logoFloat {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
 
         header h1 {
             font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background: #ffffff;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -128,6 +73,7 @@
             grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
             gap: 2.5rem;
             margin-bottom: 3rem;
+            margin-top:3rem;
         }
 
         .verbale-section {
@@ -136,7 +82,6 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 24px;
             padding: 2.5rem;
-            animation: fadeInUp 0.8s ease-out;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
@@ -155,13 +100,7 @@
         }
 
         .verbale-section:hover {
-            transform: translateY(-8px);
             border-color: rgba(102, 126, 234, 0.4);
-            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
-        }
-
-        .verbale-section:hover::before {
-            transform: scaleX(1);
         }
 
         .section-header {
@@ -189,27 +128,6 @@
             display: flex;
             flex-direction: column;
             gap: 0.75rem;
-        }
-
-        .pdf-item {
-            animation: slideIn 0.4s ease-out backwards;
-        }
-
-        .pdf-item:nth-child(1) { animation-delay: 0.1s; }
-        .pdf-item:nth-child(2) { animation-delay: 0.15s; }
-        .pdf-item:nth-child(3) { animation-delay: 0.2s; }
-        .pdf-item:nth-child(4) { animation-delay: 0.25s; }
-        .pdf-item:nth-child(5) { animation-delay: 0.3s; }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         .pdf-link {
@@ -242,10 +160,7 @@
         }
 
         .pdf-link:hover {
-            background: rgba(102, 126, 234, 0.15);
             border-color: rgba(102, 126, 234, 0.4);
-            transform: translateX(8px);
-            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
         }
 
         .pdf-icon {
@@ -328,50 +243,56 @@
             padding: 3rem 0;
             color: #666;
             font-size: 0.95rem;
-            animation: fadeIn 1s ease-out 0.5s both;
         }
 
         footer a {
             color: #667eea;
             text-decoration: none;
-            transition: color 0.3s ease;
         }
 
         footer a:hover {
             color: #764ba2;
         }
 
+        .about-us {
+            font-size: 1.3rem;
+            color: #a0a0a0;
+            font-weight: 300;
+        }
+
+        .about-us h2 {
+            color: white;
+        }
+
+        .about-us dl {
+            padding: 0.4rem 0.8rem;
+        }
+
+        .about-us p{
+            padding: 0.4rem 0.8rem;
+        }
+
+        .about-us dt {
+            
+            color: white;
+            border-radius: 20px;
+            font-weight: 600;
+            float: left;
+            padding-right: 0.3rem;
+        }
+
+        .about-us a {
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .about-us a:hover {
+            color: #764ba2;
+        }
+
         /* Animazioni */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
 
         /* Responsive */
         @media (max-width: 1024px) {
@@ -411,15 +332,31 @@
             <div class="logo-container">
                 <img src="logo.png" alt="Logo" class="logo" id="logo">
             </div>
-            <h1>Documentazione Progetto</h1>
-            <p>Repository dei verbali delle riunioni</p>
+            <h1>Tool-8</h1>
+            <p>Documentazione progetto</p>
         </header>
+        
+        <!-- Documenti -->
+        <div class="verbale-section">
+            <div class="section-header">
+                <span class="section-icon"></span>
+                <h2 class="section-title">Candidatura</h2>
+            </div>
+            <ul class="pdf-list" id="documenti-list">
+                <li class="loading">
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                </li>
+            </ul>
+        </div>
 
         <div class="verbali-grid">
+
             <!-- Verbali Interni -->
             <div class="verbale-section">
                 <div class="section-header">
-                    <span class="section-icon">📋</span>
+                    <span class="section-icon"></span>
                     <h2 class="section-title">Verbali Interni</h2>
                 </div>
                 <ul class="pdf-list" id="interni-list">
@@ -434,7 +371,7 @@
             <!-- Verbali Esterni -->
             <div class="verbale-section">
                 <div class="section-header">
-                    <span class="section-icon">📄</span>
+                    <span class="section-icon"></span>
                     <h2 class="section-title">Verbali Esterni</h2>
                 </div>
                 <ul class="pdf-list" id="esterni-list">
@@ -445,27 +382,33 @@
                     </li>
                 </ul>
             </div>
+        </div>
 
-            <!-- Documenti -->
-            <div class="verbale-section">
-                <div class="section-header">
-                    <span class="section-icon">📚</span>
-                    <h2 class="section-title">Documenti</h2>
-                </div>
-                <ul class="pdf-list" id="documenti-list">
-                    <li class="loading">
-                        <div class="loading-dot"></div>
-                        <div class="loading-dot"></div>
-                        <div class="loading-dot"></div>
-                    </li>
-                </ul>
-            </div>
+        <div class="about-us">
+            <h2>About us:</h2>
+            <dl>
+                <dt>Email del gruppo</dt>
+                <dd>- tool8eight@gmail.com</dd>
+            </dl>
+            <p><a href="https://github.com/Tool-8/Documentazione-SWE" >Repository documentazione di github</a></p>
+            <dl>
+                <dt>Besnik Murtezan</dt>
+                <dd>- besnik.murtezan@studenti.unipd.it</dd>
+                <dt>Gabriele Disa</dt>
+                <dd>- gabriele.disa@studenti.unipd.it</dd>
+                <dt>Giuliano Banchieri</dt>
+                <dd>- giuliano.banchieri@studenti.unipd.it</dd>
+                <dt>Niccolò Feltrin</dt>
+                <dd>- niccolo.feltrin@studenti.unipd.it</dd>
+                <dt>Ruben Spadiliero</dt>
+                <dd>- ruben.spadiliero@studenti.unipd.it</dd>
+                <dt>Stefano Maso</dt>
+                <dd>- stefano.maso@studenti.unipd.it</dd>
+            </dl>
         </div>
 
         <footer>
             <p>Aggiornato automaticamente via <a href="https://github.com/features/actions" target="_blank">GitHub Actions</a></p>
-            <p style="margin-top: 0.5rem; opacity: 0.7;">© 2024 - Tutti i diritti riservati</p>
-        </footer>
     </div>
 
     <script>
@@ -502,7 +445,7 @@
                 if (links.length === 0) {
                     list.innerHTML = `
                         <li class="empty-state">
-                            <div class="empty-state-icon">🔭</div>
+                            <div class="empty-state-icon"></div>
                             <div>Nessun documento disponibile</div>
                         </li>
                     `;
@@ -529,7 +472,7 @@
                     return `
                         <li class="pdf-item">
                             <a href="${directory}/${pdf}" class="pdf-link" target="_blank">
-                                <span class="pdf-icon">📄</span>
+                                <span class="pdf-icon"></span>
                                 <span class="pdf-name">${displayName}</span>
                                 ${badge}
                             </a>
@@ -539,7 +482,7 @@
             } catch (error) {
                 list.innerHTML = `
                     <li class="empty-state">
-                        <div class="empty-state-icon">⚠️</div>
+                        <div class="empty-state-icon"></div>
                         <div>Errore nel caricamento dei file</div>
                     </li>
                 `;
@@ -556,7 +499,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             loadPDFs('verbali_interni', 'interni-list');
             loadPDFs('verbali_esterni', 'esterni-list');
-            loadPDFs('documenti', 'documenti-list');
+            loadPDFs('candidatura', 'documenti-list');
         });
     </script>
 </body>
