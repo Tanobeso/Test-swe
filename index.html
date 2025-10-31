@@ -476,18 +476,18 @@
             const list = document.getElementById(listId);
             
             try {
-                const response = await fetch(`${directory}/`);
-                const text = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(text, 'text/html');
-                const links = Array.from(doc.querySelectorAll('a'))
-                    .map(a => a.getAttribute('href'))
-                    .filter(href => href && href.endsWith('.pdf'));
+                const response = await fetch(`${directory}/index.json`);
+                if (!response.ok) {
+                    throw new Error('Indice non trovato');
+                }
+                
+                const data = await response.json();
+                const links = data.files || [];
 
                 if (links.length === 0) {
                     list.innerHTML = `
                         <li class="empty-state">
-                            <div class="empty-state-icon">📭</div>
+                            <div class="empty-state-icon">🔭</div>
                             <div>Nessun verbale disponibile</div>
                         </li>
                     `;
@@ -514,7 +514,7 @@
                     return `
                         <li class="pdf-item">
                             <a href="${directory}/${pdf}" class="pdf-link" target="_blank">
-                                <span class="pdf-icon">📑</span>
+                                <span class="pdf-icon">📄</span>
                                 <span class="pdf-name">${displayName}</span>
                                 ${badge}
                             </a>
