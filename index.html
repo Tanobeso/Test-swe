@@ -414,7 +414,7 @@
     <script>
         // Funzione per estrarre la data dal nome del file (se presente)
         function extractDate(filename) {
-            filename = filename.replace('_','-');
+            filename = filename.replace(/[_]/g,'-');
             const match = filename.match(/(\d{4})-(\d{2})-(\d{2})/);
             if (match) {
                 return new Date(match[0]);
