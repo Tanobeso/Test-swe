@@ -475,16 +475,15 @@
                 list.innerHTML = links.map((pdf, index) => {
                     const displayName = formatFilename(pdf);
                     const date = extractDate(pdf);
-                    const badge = date ? 
+                    /*const badge = date ? 
                         `<span class="pdf-badge">${date.toLocaleDateString('it-IT', { day: '2-digit', month: 'short', year: 'numeric' })}</span>` : 
                         '';
-                    
+                    */
                     return `
                         <li class="pdf-item">
                             <a href="${directory}/${pdf}" class="pdf-link" target="_blank">
                                 <span class="pdf-icon"></span>
                                 <span class="pdf-name">${displayName}</span>
-                                ${badge}
                             </a>
                         </li>
                     `;
