@@ -414,7 +414,8 @@
     <script>
         // Funzione per estrarre la data dal nome del file (se presente)
         function extractDate(filename) {
-            const match = filename.match(/(\d{4})_(\d{2})_(\d{2})/);
+            filename = filename.replace('_','-');
+            const match = filename.match(/(\d{4})-(\d{2})-(\d{2})/);
             if (match) {
                 return new Date(match[0]);
             }
@@ -426,7 +427,7 @@
             // Rimuove l'estensione
             const name = filename.replace('.pdf', '');
             // Sostituisce underscore e trattini con spazi
-            return name.replace(/[_-]/g, ' ');
+            return name.replace(/[_]/g, ' ');
         }
 
         // Funzione per caricare i PDF da una directory
