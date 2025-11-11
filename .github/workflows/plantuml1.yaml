@@ -1,0 +1,32 @@
+name: Generate PlantUML Diagrams
+on:
+  push:
+    paths:
+      - '**.puml'
+      - '**.plantuml'
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  generate-diagrams:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Generate PlantUML diagrams
+        uses: grassedge/generate-plantuml-action@v1
+        with:
+          pattern: "**/*.puml"
+          output: "diagrams/"  # Optional: output directory
+          args: "-tsvg -tpng"  # Generate both SVG and PNG
+
+      - name: Commit generated diagrams
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add diagrams/ || true
+          git commit -m "Auto-generated PlantUML diagrams" || exit 0
+          git push

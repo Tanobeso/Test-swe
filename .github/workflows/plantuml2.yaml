@@ -1,0 +1,33 @@
+name: Generate PlantUML Diagrams
+on:
+  push:
+    paths: ['docs/use-cases/*.puml']
+
+jobs:
+  plantuml:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Cache PlantUML
+        uses: actions/cache@v3
+        with:
+          path: ~/.plantuml
+          key: plantuml-${{ hashFiles('https://github.com/plantuml/plantuml/releases/latest/download/plantuml.jar') }}
+          
+      - name: Download PlantUML
+        run: |
+          mkdir -p ~/.plantuml
+          wget -O ~/.plantuml/plantuml.jar \
+          https://github.com/plantuml/plantuml/releases/latest/download/plantuml.jar
+          
+      - name: Generate diagrams
+        run: |
+          java -jar ~/.plantuml/plantuml.jar -tsvg -tpng \
+          -odocs/diagrams docs/use-cases/*.puml
+          
+      - name: Commit and push
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          file_pattern: 'docs/diagrams/*'
+          commit_message: 'Update PlantUML diagrams'
