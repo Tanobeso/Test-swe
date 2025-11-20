@@ -139,6 +139,7 @@ Descrizione attori
     \subsubsection{Attori Secondari}
         \begin{itemize}
             \item \textbf{LLM}: Large Language Model esterno che verrà integrato per fornire le funzionalità AI
+            \item \textbf{Server Locale}: Server locale sul quale verranno preservate ed accedute le note
         \end{itemize}
 
 \subsection{UC1 - Scrittura testo}
@@ -207,7 +208,7 @@ Descrizione attori
     \item L'utente visualizza il testo formattato nell'area di output
 \end{enumerate}
 
-\subsection{UC3 - Riassumere testo con LLM}
+\subsection{UC3 - Riassunto testo con LLM}
 \begin{center}
 \begin{tikzpicture} 
 \begin{umlsystem}[x=6, fill=white!10]{Sistema}
@@ -254,9 +255,11 @@ Descrizione attori
 \begin{itemize}
     \item Nel caso in cui l'utente non ritenga opportuno il riassunto suggerito:
     \begin{enumerate}
-        \item L'utente 
+        \item L'utente rifiuta il riassunto suggerito
+        \item Il sistema ritorna alle precondizioni (mantenendo quindi la selezione del testo) 
     \end{enumerate}
 \end{itemize}
+
 \subsection{UC4 - Riscrittura testo con LLM}
 \begin{center}
 \begin{tikzpicture} 
@@ -277,7 +280,7 @@ Descrizione attori
 
 \textbf{Attori principali}
 \begin{itemize}
-    \item Utente non registrato
+    \item Utente
 \end{itemize}
 \textbf{Attori secondari}
 \begin{itemize}
@@ -286,21 +289,36 @@ Descrizione attori
 \textbf{Precondizioni}
 \begin{itemize}
     \item L'utente è connesso al sistema
-    \item L'utente seleziona una porzione del testo o l'intero testo e richiede che venga riscritto in modo differente
+    \item E' stata aperta una nota
+    \item L'utente seleziona una porzione del testo o l'intero testo
 \end{itemize}
 \textbf{Postcondizioni}
 \begin{itemize}
-    \item Il testo viene riscritto in modo diverso
+    \item Il testo selezionato viene riscritto in modo diverso
 \end{itemize}
 \textbf{Scenario principale}
 \begin{enumerate}
-    \item L'utente attiva il comando "Riscrivi testo"
-    \item L'utente seleziona come vuole che venga riscritto il testo (miglioramento, sistemazione grammaticale, cambio tono...)
+    \item L'utente attiva la funzionalità "Riscrivi Testo"
+    \item L'utente seleziona almeno uno tra i seguenti aspetti per definire la riscrittura: 
+    \begin{itemize}
+        \item Miglioramento Lessico 
+        \item Correzione Grammatica
+        \item Variazione Stile Espositivo
+        \item Modifica Estensione Testo 
+    \end{itemize}
     \item Il sistema invia la richiesta all'API dell'LLM
     \item Il sistema riceve la risposta dall'LLM
     \item Il sistema mostra il risultato all'utente
     \item L'utente decide se sostituire il testo precedentemente selezionato o aggiungerlo in coda
 \end{enumerate}
+\textbf{Estensioni}
+\begin{itemize}
+    \item Nel caso in cui l'utente non ritenga opportuna la riscrittura proposta:
+    \begin{enumerate}
+        \item L'utente rifiuta il risultato proposto
+        \item Il sistema ritorna alle precondizioni (mantenendo quindi la selezione del testo) 
+    \end{enumerate}
+\end{itemize}
 
 \subsection{UC5 - Traduzione testo con LLM}
 \begin{center}
@@ -320,7 +338,7 @@ Descrizione attori
 \end{center}
 \textbf{Attori principali}
 \begin{itemize}
-    \item Utente non registrato
+    \item Utente
 \end{itemize}
 \textbf{Attori secondari}
 \begin{itemize}
@@ -329,7 +347,7 @@ Descrizione attori
 \textbf{Precondizioni}
 \begin{itemize}
     \item L'utente è connesso al sistema
-    \item L'utente seleziona una porzione del testo o l'intero testo e richiede che venga tradotto in un'altra lingua
+    \item L'utente seleziona una porzione del testo o l'intero testo
 \end{itemize}
 \textbf{Postcondizioni}
 \begin{itemize}
@@ -337,19 +355,27 @@ Descrizione attori
 \end{itemize}
 \textbf{Scenario principale}
 \begin{enumerate}
-    \item L'utente attiva il comando "Traduci testo"
+    \item L'utente attiva la funzionalità "Traduci Testo"
     \item L'utente seleziona la lingua in cui desidera tradurre il testo selezionato
     \item Il sistema invia la richiesta all'API dell'LLM
     \item Il sistema riceve la risposta dall'LLM
     \item Il sistema mostra il risultato all'utente
     \item L'utente decide se sostituire il testo precedentemente selezionato o aggiungerlo in coda
 \end{enumerate}
+\textbf{Estensioni}
+\begin{itemize}
+    \item Nel caso in cui l'utente non ritenga opportuna la riscrittura proposta:
+    \begin{enumerate}
+        \item L'utente rifiuta il risultato proposto
+        \item Il sistema ritorna alle precondizioni (mantenendo quindi la selezione del testo) 
+    \end{enumerate}
+\end{itemize}
 
-\subsection{UC6 - Creazione intero testo con LLM}
+\subsection{UC6 - Generazione Testo con LLM}
 \begin{center}
 \begin{tikzpicture} 
 \begin{umlsystem}[x=6, fill=white!10]{Sistema}
-  \umlusecase[x=0, y=4, name=creazione]{UC6 - Creazione intero testo con LLM}
+  \umlusecase[x=0, y=4, name=creazione]{UC6 - Generazione Testo con LLM }
 \end{umlsystem}
 
 % Attori
@@ -372,19 +398,29 @@ Descrizione attori
 \textbf{Precondizioni}
 \begin{itemize}
     \item L'utente è connesso al sistema
-    \item L'utente inserisce una descrizione del testo che vuole generare nell'area dedicata
+    \item E' stata aperta una nota
+    \item L'utente seleziona il punto in cui vuole che venga generato il testo
 \end{itemize}
 \textbf{Postcondizioni}
 \begin{itemize}
-    \item Viene generato un intero testo sulla base della descrizione fatta dall'utente
+    \item Viene inserito il testo generato sulla base della descrizione fatta dall'utente
 \end{itemize}
 \textbf{Scenario principale}
 \begin{enumerate}
-    \item L'utente scrive una descrizione del testo che vuole ottenere nell'apposita area per la generazione di testo tramite LLM
+    \item L'utente attiva la funzionalità "Genera Testo"
+    \item L'utente definisce un prompt contenente la descrizione del testo da generare
     \item Il sistema invia la richiesta all'API dell'LLM
     \item Il sistema riceve la risposta dall'LLM
     \item Il sistema mostra il testo generato all'utente
 \end{enumerate}
+\textbf{Estensioni}
+\begin{itemize}
+    \item Nel caso in cui l'utente non ritenga opportuno il testo generato:
+    \begin{enumerate}
+        \item L'utente rifiuta il risultato proposto
+        \item Il sistema ritorna alle precondizioni
+    \end{enumerate}
+\end{itemize}
 
 \subsection{UC7 - Salvataggio nota}
 \begin{center}
@@ -395,14 +431,20 @@ Descrizione attori
 
 % Attori
 \umlactor[x=0, y=4]{Utente}
+\umlactor[x=11, y=4,scale = 0.75]{Server Locale}
 
 % Associazioni Utente
 \umlassoc{Utente}{salvataggio}
+\umlassoc{Server Locale}{salvataggio}
 \end{tikzpicture}
 \end{center}
 \textbf{Attori principali}
 \begin{itemize}
     \item Utente
+\end{itemize}
+\textbf{Attori secondari}
+\begin{itemize}
+    \item Server Locale
 \end{itemize}
 \textbf{Precondizioni}
 \begin{itemize}
@@ -411,13 +453,28 @@ Descrizione attori
 \end{itemize}
 \textbf{Postcondizioni}
 \begin{itemize}
-    \item La nota viene salvata sul filesystem dell'applicazione
+    \item La nota viene salvata sul Server locale
 \end{itemize}
 \textbf{Scenario principale}
 \begin{enumerate}
-    \item L'utente decide la posizione in cui verrà salvata la nota
-    \item La nota viene salvata nel filesystem dell'applicazione
+    \item L'utente attiva la funzionalità "Salva Nota"
+    \item Il sistema salva la nota sul Server
 \end{enumerate}
+\textbf{Estensioni}
+\begin{itemize}
+    \item Nel caso in cui la nota inizialmente aperta dall'utente avesse successivamente subito delle modifiche nel Server:
+    \begin{enumerate}
+        \item Il sistema avvisa la presenza di modifiche nel Server non contenute nella versione corrente dell'utente
+        \item Il sistema propone all'utente la scelta tra:
+        \begin{itemize}
+            \item Sovrascrivere la nota presente sul Server con la versione corrente dell'utente
+            \item Salvare la nota con un nome differente
+            \item Aggiornare la nota corrente dell'utente con la versione presente sul Server
+        \end{itemize}
+        \item L'utente seleziona una tra le opzioni
+        \item Il sistema effettua l'operazione scelta dall'utente
+    \end{enumerate}
+\end{itemize}
 
 \subsection{UC8 - Implementazione modello "sei cappelli"}
 \begin{center}
