@@ -20,6 +20,4 @@
 # Contatti
 tool8eight@gmail.com
 
-AOIVHNOP)BVHIOAEBIOPAEDBHOPIAHJE)OGBAPIOEGH)AEHFIOA=)PEFGHOPI)EHJfs
-
-helo hello hello helo helo helo
+Verificato
