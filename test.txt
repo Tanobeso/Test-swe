@@ -3,3 +3,7 @@ Sono un figo perché verifico e faggio merge di un commit gigante
 Ciao mi chiamo ciao mi chiamo Niccolò
 
 No, ti chiami Giuliano
+
+Edit file
+Seconda modifica a caso
+Verificato
