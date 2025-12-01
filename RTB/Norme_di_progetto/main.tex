@@ -196,5 +196,83 @@ Ciascun documento ha una struttura ben definita:
   \item Indice: elenco dei contenuti del documento
 \end{itemize}
 \subsubsection{Ciclo di vita documenti}
+Un documento ha le seguenti fasi:
+\begin{itemize}
+  \item Stesura: uno o più redattori si occupano della stesura del documento
+  \item Verifica: un membro del gruppo, diversi da quelli che hanno scritto il documento, ha il compito di verifica il documento
+  \item Approvazione: il responsabile del progetto decide se approvare l'entrata di un documento nella repository. Se il documento non viene approvato torna alla fase di stesura
+\end{itemize}
+\subsection{Controllo di configurazione}
+\subsubsection{Versionamento}
+Il versionamento scelto è composto da due numeri: x.y
+\begin{itemize}
+  \item x è un numero intero, parte da zero è viene incrementato ogni volta che il responsabile approverà il documento
+  \item y è un numero intero positivo e rappresenta lo stato di verifica del documento
+\end{itemize}
+\subsubsection{GitHub e Git}
+Il gruppo ha deciso di utilizzare GitHun come strumento di versionamento e Git per collegarsi alla repository GitHub. 
+\subsubsection{Scopo e struttura repository "Documentazine-SWE"}
+La repository ha la funzione di mantere una versione aggiornata dei file che dovranno produrre documentazione, ovvero i file .tex.\\
+La struttura della repository deve essere:
+\begin{itemize}
+  \item Candidatura
+  \item RTB
+  \item Verbali 
+  \begin{itemize}
+    \item Interni
+    \item Esterni
+  \end{itemize}
+\end{itemize}
+\subsubsection{Scopo e struttura "Proof-of-Concept}
+DA FARE!!!
+\subsubsection{Controllo di flusso}
+CHIEDERE PRIMA DI SCRIVERE
 
+\subsection{Gestione della qualità}
+
+\subsection{Verifica}
+
+\subsection{Validazione}
+
+\section{Processi organizzativi}
+Questa sezione è dedicata a dare una breve descrizione di tutti i ruoli e delle responsabilità dei membri del gruppo.
+\subsection{Responsabile}
+Il responsabile è la figura che guida e coordina le attività per la realizzazione di un progetto. Le sue responsabilità includono:
+\begin{itemize}
+  \item Pianificare e coordinare le attività di progetto
+  \item Assegnare le attività a chi le dovrà svolgere
+  \item Gestire lo Sprint e le milestone
+  \item Approvare l'emissione della documentazione
+\end{itemize}
+\subsubsection{Gestione dello sprint}
+All'inizio di ogni sprint il responsabile dovrà:
+\begin{enumerate}
+  \item Determinare la durata dello sprint
+  \item Individuare le attività che si dovranno svolgere durante lo sprint
+  \item Creare le issue, associate alle attività e associarle a chi dovrà svolgerle
+  \item Aggiornare il file Piano di Progetto, con le informazioni relative al nuovo sprint
+\end{enumerate}
+\subsubsection{Verifica dei documenti}
+SCRIVERE PROCEDIMENTO PER APPROVAZIONE DOC
+\subsubsection{Verifica del codice}
+Il responsabile dovrà approvare o rifiutare la pull request.
+\subsection{Amministratore}
+L'amministratore si occupa di:
+\begin{itemize}
+  \item Risolvere problemi riguardanti la gestione dei processi
+  \item Ricercare risorse per migliorare l'ambiente di lavoro
+  \item Attuare piani e procedure per la gestione della qualità
+\end{itemize}
+\subsection{Analista}
+Le responsabilità dell'analista riguardano: 
+\begin{itemize}
+  \item Redigere il documento "Analisi dei requsiti"
+  \item Studiare i casi d'uso
+  \item Aggiornare i documenti Piano di progetto e Piano di Qualifica
+\end{itemize}
+\subsection{Progettista}
+
+\subsection{Verificatore}
+
+\subsection{Programmatore}
 \end{document}
