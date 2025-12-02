@@ -674,8 +674,8 @@ Descrizione attori:
 \umlactor[x=10, y=4]{LLM}
 
 % Associazioni Utente
-\umlassoc{Utente}{traduzione}
-\umlassoc{LLM}{traduzione}
+\umlassoc{Utente}{creazione}
+\umlassoc{LLM}{creazione}
 \end{tikzpicture}
 \end{center}
 
@@ -958,6 +958,56 @@ Descrizione attori:
         \item Il testo viene sostituito con la versione riadattata
     \end{enumerate}
 \end{itemize}
+
+\clearpage
+
+\subsubsection*{(OPT) UC12 - Associazione Note}
+
+\vspace*{\fill}
+
+\addcontentsline{toc}{subsubsection}{(OPT) UC12 - Associazione Note}
+\begin{center}
+\begin{tikzpicture} 
+\begin{umlsystem}[x=5, fill=white!10]{Sistema}
+  \umlusecase[x=0, y=4, name=associazione]{(OPT) UC12 - Associazione Note}
+\end{umlsystem}
+
+% Attori
+\umlactor[x=0, y=4]{Utente}
+
+% Associazioni Utente
+\umlassoc{Utente}{associazione}
+\end{tikzpicture}
+\end{center}
+
+\vspace*{\fill}
+
+\textbf{Attori principali}
+\begin{itemize}
+    \item Utente
+\end{itemize}
+\textbf{Precondizioni}
+\begin{itemize}
+    \item L'utente è connesso al sistema
+    \item E' stata aperta una nota
+\end{itemize}
+\textbf{Postcondizioni}
+\begin{itemize}
+    \item Viene associata la nota specificata dall'utente tramite il link MarkDown
+\end{itemize}
+\textbf{Scenario principale}
+\begin{enumerate}
+    \item L'utente inserisce all'interno del testo un link alla nota da associare
+\end{enumerate}
+\textbf{Estensioni}
+\begin{itemize}
+    \item Nel caso in cui venga successivamente effettuata un'operazione sul testo tramite LLM:
+    \begin{enumerate}
+        \item Il sistema fornirà all'LLM un contesto basato anche sulla nota associata
+    \end{enumerate}
+\end{itemize}
+
+\vspace*{\fill}
 
 \clearpage
 
