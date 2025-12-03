@@ -158,14 +158,13 @@ principale e scenari alternativi (ove presenti).
 Descrizione attori:
     \subsubsection{Attori Principali}
         \begin{itemize}
-            \item \textbf{Utente}: persona che accede alle note all'interno del sistema 
+            \item \textbf{Utente}: persona che accede al sistema 
         \end{itemize}
     \subsubsection{Attori Secondari}
         \begin{itemize}
-            \item \textbf{LLM}: Large Language Model esterno che verrà integrato per fornire le funzionalità AI
-            \item \textbf{Server Locale}: Server locale sul quale verranno preservate ed accedute le note
+            \item \textbf{LLM}: Large Language Model che verrà integrato per fornire le funzionalità AI
+            \item \textbf{Server Locale}: server in cui vengono salvate le note
         \end{itemize}
-
 \bigskip
 
 \subsection{Diagrammi e Descrizioni Testuali}
@@ -292,12 +291,12 @@ Descrizione attori:
 
 \clearpage
 
-\subsubsection*{UC3 - Ricerca Nota}
-\addcontentsline{toc}{subsubsection}{UC3 - Ricerca Nota}
+\subsubsection*{UC3 - Ricerca nota per nome}
+\addcontentsline{toc}{subsubsection}{UC3 - Ricerca nota per nome}
 \begin{center}
 \begin{tikzpicture} 
 \begin{umlsystem}[x=5, fill=white!10]{Sistema}
-  \umlusecase[x=0, y=4, name=ricerca]{UC3 - Ricerca Nota}
+  \umlusecase[x=0, y=4, name=ricerca]{UC3 - Ricerca nota per nome}
 \end{umlsystem}
 
 % Attori
@@ -329,7 +328,7 @@ Descrizione attori:
 \textbf{Scenario principale}
 \begin{enumerate}
     \item L'utente attiva la funzionalità di \textit{"Ricerca Nota"}
-    \item L'utente specifica i termini della ricerca
+    \item L'utente specifica il nome di una nota da ricercare 
     \item Il sistema effettua la ricerca nel server locale
     \item Il sistema ritorna i risultati della ricerca
 \end{enumerate}
@@ -377,8 +376,14 @@ Descrizione attori:
     \item L'utente conferma l'eliminazione della nota
     \item Il sistema elimina la nota dal Server Locale
 \end{enumerate}
-
-\clearpage
+\textbf{Estensioni}
+\begin{itemize}
+    \item Nel caso in cui la nota inizialmente aperta dall’utente fosse stata eliminata da un altro utente:
+    \begin{itemize}
+        \item L'utente viene avvisato che la nota non esiste
+        \item L'utente torna alla schermata principale
+    \end{itemize}
+\end{itemize}
 
 \subsubsection*{UC5 - Scrittura testo}
 \addcontentsline{toc}{subsubsection}{UC5 - Scrittura testo}
@@ -413,8 +418,6 @@ Descrizione attori:
 \begin{enumerate}
     \item L'utente scrive del testo nell'area dedicata all'editing secondo la sintassi MarkDown
 \end{enumerate}
-
-\vfill
 
 \subsubsection*{UC6 - Visualizzazione testo formattato}
 \addcontentsline{toc}{subsubsection}{UC6 - Visualizzazione testo formattato}
@@ -463,7 +466,6 @@ Descrizione attori:
     \end{enumerate}
 \end{itemize}
 
-\clearpage
 
 \subsubsection*{UC7 - Riassunto testo con LLM}
 
@@ -523,9 +525,6 @@ Descrizione attori:
     \end{enumerate}
 \end{itemize}
 
-\vspace*{\fill}
-
-\clearpage
 
 \subsubsection*{UC8 - Riscrittura testo con LLM}
 
@@ -592,9 +591,7 @@ Descrizione attori:
     \end{enumerate}
 \end{itemize}
 
-\vspace*{\fill}
 
-\clearpage
 
 \subsubsection*{UC9 - Traduzione testo con LLM}
 
@@ -654,19 +651,15 @@ Descrizione attori:
     \end{enumerate}
 \end{itemize}
 
-\vspace*{\fill}
 
-\clearpage
 
-\subsubsection*{UC10 - Generazione Testo con LLM}
+\subsubsection*{UC10 - Generazione testo con LLM}
 
-\vspace*{\fill}
-
-\addcontentsline{toc}{subsubsection}{UC10 - Generazione Testo con LLM}
+\addcontentsline{toc}{subsubsection}{UC10 - Generazione testo con LLM}
 \begin{center}
 \begin{tikzpicture} 
 \begin{umlsystem}[x=5, fill=white!10]{Sistema}
-  \umlusecase[x=0, y=4, name=creazione]{UC10 - Generazione Testo con LLM }
+  \umlusecase[x=0, y=4, name=creazione]{UC10 - Generazione testo con LLM }
 \end{umlsystem}
 
 % Attori
@@ -679,8 +672,6 @@ Descrizione attori:
 \end{tikzpicture}
 \end{center}
 
-\vspace*{\fill}
-
 \textbf{Attori principali}
 \begin{itemize}
     \item Utente
@@ -692,7 +683,7 @@ Descrizione attori:
 \textbf{Precondizioni}
 \begin{itemize}
     \item L'utente è connesso al sistema
-    \item E' stata aperta una nota
+    \item È stata aperta una nota
     \item L'utente seleziona il punto in cui vuole che venga generato il testo
 \end{itemize}
 \textbf{Postcondizioni}
@@ -963,8 +954,6 @@ Descrizione attori:
 
 \subsubsection*{(OPT) UC12 - Associazione Note}
 
-\vspace*{\fill}
-
 \addcontentsline{toc}{subsubsection}{(OPT) UC12 - Associazione Note}
 \begin{center}
 \begin{tikzpicture} 
@@ -980,7 +969,6 @@ Descrizione attori:
 \end{tikzpicture}
 \end{center}
 
-\vspace*{\fill}
 
 \textbf{Attori principali}
 \begin{itemize}
