@@ -2,14 +2,14 @@ name: Auto PR
 
 on:
   push:
-    branches-ignore:
-      - main
-      - main/**
+    branches:
+      - '*'
+      - '!main'
 
 permissions:
   contents: write
   pull-requests: write
-  
+ 
 jobs:
   create-pull-request:
     runs-on: ubuntu-latest
